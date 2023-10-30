@@ -14,4 +14,12 @@ class PhysicSystem:
         position.x += position.vx
         position.y += position.vy
         render.sprite.goto(position.x, position.y)
+        if e.hasComponent(Components.CCollision()):
+            coll = EM.getEntityCMP(e , Components.CCollision())
+            coll.bbox.x = position.x
+            coll.bbox.y = position.y
+            coll.bbox.x2 = position.x + 20
+            coll.bbox.y2 = position.y + 20
+
+        
 
