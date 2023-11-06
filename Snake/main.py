@@ -12,6 +12,7 @@ def createWindow():
     wn.bgcolor("black")
     wn.setup(width=1000, height=1000)
     
+    
 # Game function / game loop
 def game ():
     rendSys = RenderSystem.RenderSystem()
@@ -19,6 +20,7 @@ def game ():
     inpSys  = InputSystem.InputSystem()
     colSys = CollisionSystem.CollisionSystem()
     while True:
+        
         inpSys.update(ge, wn)
         phySys.update(ge, wn)
         colSys.update(ge, wn)
@@ -36,7 +38,7 @@ def game ():
 createWindow()
 
 ge = GameEngine.ManEntity()
-player = ge.createEntity([Components.CRender(1), Components.CPosition(0,0), Components.CCollision()],[Components.Tags().snake, Components.Tags().collider])
+player = ge.createEntity([Components.CRender(1), Components.CPosition(0,0), Components.CCollision(), Components.CSnake()],[Components.Tags().snake, Components.Tags().collider])
 ball = ge.createEntity([Components.CRender(1), Components.CPosition(20,20), Components.CCollision()],[Components.Tags().collisionable, Components.Tags().apple])
 ge.getEntityCMP(ball, Components.CRender()).sprite.shape("circle")
 game()

@@ -21,6 +21,8 @@ class CollisionSystem:
             #Hay colision
             if(e.hasTag(Components.Tags().apple)):
                 self.collisionWithApple(EM, self.actualCollider, e)
+            if(e.hasTag(Components.Tags().tail)):
+                self.collisionWithTail(EM, self.actualCollider, e)
             
 
     def collisionAABB(self, collider:Components.CCollision.BoundingBox, collisionable:Components.CCollision.BoundingBox):
@@ -30,12 +32,15 @@ class CollisionSystem:
             return 0
         
         return 1
-    def collisionWithApple(self, EM, e1, e2):
-        rend = EM.getEntityCMP(e2 , Components.CRender())
+    def collisionWithApple(self, EM:ManEntity.ManEntity, e1, e2):
+        #rend = EM.getEntityCMP(e2 , Components.CRender())
         pos1 = EM.getEntityCMP(e1 , Components.CPosition())
         pos2 = EM.getEntityCMP(e2 , Components.CPosition())
         if pos1.x == pos2.x and pos1.y == pos2.y:
-            print("moving")
+            #New square to snake
+            snake = EM.getEntityCMP(e1, Components.CSnake())
+            snake.tail.append(EM.createEntity([Components.CRender(1), Components.CPosition(-10000, -10000), Components.CCollision()],[Components.Tags().collisionable, Components.Tags().tail]))
+            #Move apple
             n  = random.randint(-24, 24)
             nn = random.randint(-24, 24)
             n  = random.randint(-24, 24)
@@ -43,5 +48,9 @@ class CollisionSystem:
             pos2.x = 20 * n
             pos2.y = 20 * nn
         
-
+    def collisionWithTail(self, EM:ManEntity.ManEntity, e:ManEntity.Entity, e2:ManEntity.Entity):
+        pos1 = EM.getEntityCMP(e , Components.CPosition())
+        pos2 = EM.getEntityCMP(e2 , Components.CPosition())
+        if pos1.x == pos2.x and pos1.y == pos2.y:
+            print("cola")
             

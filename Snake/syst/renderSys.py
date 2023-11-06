@@ -14,4 +14,3 @@ class RenderSystem:
             render.sprite.showturtle()
         else:
             render.sprite.hideturtle()
-

@@ -51,3 +51,4 @@ class Tags:
         self.collider       = 0b00010 
         self.collisionable  = 0b00100 
         self.apple          = 0b01000 
+        self.tail           = 0b10000
